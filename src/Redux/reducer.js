@@ -16,14 +16,15 @@ function rootReducer (state = initialState, action) {
         case ACTION_LOGIN_SUCCESS:
             {
                 const response = action.payload
-                console.log(response, "Login++++");
                 return {
                     ...state,
-                    id: response.id,
-                    name: response.name,
-                    email: response.email,
-                    role: response.role,
-                    isAdmin: response.isAdmin,
+                    loginState: {
+                        id: response.id,
+                        name: response.name,
+                        email: response.email,
+                        role: response.role,
+                        isAdmin: response.isAdmin,
+                    }
                 }
             }
         

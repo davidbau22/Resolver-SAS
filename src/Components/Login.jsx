@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {signIn} from '../Redux/actions';
 
 
@@ -22,17 +22,15 @@ function checkErrors(post) {
         errors.password = 'Please provide a password !!'
     }
 
+    if(post.length === 0) {
+        errors.form = 'Please provide data!!'
+    }
     return errors;
 }
 
 export default function Login() {
-
-    
-
-    const [error, setError] = useState('')
-
-
-    const navigate = useNavigate();
+  
+    const navigate = useNavigate()    
     const dispatch = useDispatch();
     const [errors, setErrors] = useState({})
     const [post, setPost] = useState({
@@ -46,9 +44,19 @@ export default function Login() {
     function handleSubmit(e) {
         e.preventDefault();
         console.log(e.target, 'event login')
-        if ((!post.email || !post.password) || (Object.values(errors).length > 0)) return setAlert('Please fill in the entire form :/');
+        if ((!post.email || !post.password) || (Object.values(errors).length > 0)){
+            // return setAlert('Please fill in the entire form :/');
+            return window.alert('Please fill in the entire form :/')
+        } 
+            
         else {
             dispatch(signIn(post))
+            console.log(post.email,'emailusado');
+            if(post.email.includes('admin')){
+                navigate('/adminhome')
+            }else {
+                navigate('/technicianhome')                
+            }
         }
     }
     function handleInputChange(e) {

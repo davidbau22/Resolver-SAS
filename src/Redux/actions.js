@@ -34,7 +34,8 @@ export const signIn = (Customers) => {
     // }
     return dispatch => { 
         console.log(userAdmin, "login success");
-        dispatch(actionLoginSuccess(userAdmin))
+        const userType = Customers.email.includes('admin') ? userAdmin : userTechnician;
+        dispatch(actionLoginSuccess(userType))
     }
 }
 
