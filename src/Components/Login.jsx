@@ -43,15 +43,12 @@ export default function Login() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(e.target, 'event login')
+        
         if ((!post.email || !post.password) || (Object.values(errors).length > 0)){
             // return setAlert('Please fill in the entire form :/');
             return window.alert('Please fill in the entire form :/')
-        } 
-            
-        else {
+        } else {
             dispatch(signIn(post))
-            console.log(post.email,'emailusado');
             if(post.email.includes('admin')){
                 navigate('/adminhome')
             }else {

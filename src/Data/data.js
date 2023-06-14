@@ -4,7 +4,7 @@ export const userAdmin =
         name:'admin',
         email:'admin@example.com',
         password:'12345',
-        role:'admin',
+        role:'administrador',
         isAdmin:'true'
 
     };
@@ -19,9 +19,19 @@ export const userTechnician =
         isAdmin:'false'
     };
 
+export const subsidiaryList = [
+    {
+        id:1,
+        subsidiaryType:'A',
+    },
+    {
+        id:2,
+        subsidiaryType:'B',
+    },
+];
+
 export const subsidiary_A = [
     {
-       subsidiary:{
         id:1,
         subsidiaryType:'A',
         workers:[
@@ -37,18 +47,19 @@ export const subsidiary_A = [
                 id:2,
                 subsidiary:'A',
                 name:'Manuel Santos',
-                currentlyStatus:'active',
+                currentlyStatus:'inactive',
                 assingedResources:[],
                 visitedClients:[]
             },
         ]
-       }
+       
     }
-]    
+]   
+
 export const subsidiary_B = [
     {
-       subsidiary:{
-        id:1,
+
+        id:2,
         subsidiaryType:'B',
         workers:[
             {
@@ -63,11 +74,11 @@ export const subsidiary_B = [
                 id:2,
                 subsidiary:'B',
                 name:'Jose Rios',
-                currentlyStatus:'active',
+                currentlyStatus:'inactive',
                 assingedResources:[],
                 visitedClients:[]
             },
         ]
-       }
+
     }
 ]    
