@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 ////////--Data Model//////////////
 import {userAdmin, userTechnician, subsidiaryList, subsidiary_A, subsidiary_B} from '../Data/data';
 
@@ -45,41 +45,41 @@ export const signIn = (Customers) => {
 ////////--Subsidiary START--//////////////
 
 export function getSubsidiary (){
-    // return async function (dispatch) {
-    //     let urlJson = await axios.get(`http://localhost:3001/subsidiary`);
-    //     return dispatch({
-    //         type:'GET_SUBSIDIARY',
-    //         payload: urlJson.data
-    //     })
-    // }
-    return function (dispatch) {
+    return async function (dispatch) {
+         let urlJson = await axios.get(`http://localhost:3001/subsidiary`);
+         return dispatch({
+             type:'GET_SUBSIDIARY',
+             payload: urlJson.data
+         })
+    }
+    /* return function (dispatch) {
         return dispatch ({ 
             type:'GET_SUBSIDIARY',
             payload: subsidiaryList
         })
-    }
+    } */
 };
             
 export function getSubsidiaryById(id){
-    // try {
-    // return async function (dispatch) {
-    //     let urlJson = await axios.get(`http://localhost:3001/subsidiary/${id}`);
-    //     return dispatch({
-    //         type:'GET_SUBSIDIARY',
-    //         payload: urlJson.data
-    //     })
-    // }
-    //}catch(e){
-    //   console.log('There is an error with the details path');
-    //    alert('There is an error with the details path');  
-    //}
-    return function (dispatch) {
+    try {
+     return async function (dispatch) {
+         let urlJson = await axios.get(`http://localhost:3001/sucursal/${id}`);
+         return dispatch({
+             type:'SUBSIDIARY_DETAILS',
+             payload: urlJson.data
+         })
+    }
+    }catch(e){
+       console.log('There is an error with the details path');
+        alert('There is an error with the details path');  
+    }
+    /* return function (dispatch) {
         const subsidiaryType = id === 1 ? subsidiary_A : subsidiary_B;
         return dispatch ({ 
             type:'SUBSIDIARY_DETAILS',
             payload: subsidiaryType
         })
-    }
+    } */
 };
 
 ////////--Subsidiary END--//////////////

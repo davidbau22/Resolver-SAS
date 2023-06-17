@@ -19,15 +19,12 @@ export default function AdminHome() {
         dispatch(getSubsidiary());        
     },[])
 
-    async function handleSubsidiarySelection(subTypeId){   
-        setSelectedSubsidiary(subTypeId);
-       await dispatch(getSubsidiaryById(subTypeId)); 
-        // const subsidiaryData = currentSubsidiary.find(
-        //     (subsidiary) => subsidiary.id === subTypeId
-        // );
-        // dispatch(setCurrentWorkers(subsidiaryData.workers));
-        const workers = currentSubsidiary[0]?.workers || [];
-       await dispatch(setCurrentWorkers(workers));
+    function handleSubsidiarySelection(subTypeId){ 
+      console.log(subTypeId,'soy subTypeId----------');   
+      setSelectedSubsidiary(subTypeId);
+      dispatch(getSubsidiaryById(subTypeId)); 
+      /* const workers = currentSubsidiary[0]?.workers || [];
+      dispatch(setCurrentWorkers(workers)); */
 
     }
 
@@ -39,7 +36,7 @@ export default function AdminHome() {
             {
                 allSubsidiaries && allSubsidiaries.map((s) =>{
                     return (
-                        <button key={s.id} onClick={() => handleSubsidiarySelection(s.id)}>
+                        <button key={s.id} onClick={() => handleSubsidiarySelection(s.subsidiaryType)}>
                             { `Sucursal ${s.subsidiaryType}`}
                         </button>
                     )
@@ -48,13 +45,14 @@ export default function AdminHome() {
         </div>
         {selectedSubsidiary && (
         <>
-          {currentSubsidiary.map((r) => (
+
             <Subsidiary
-              key={r.id}
-              subsidiaryType={r.subsidiaryType}
-              workers={r.workers}
+              key={currentSubsidiary.subsidiaryType}
+              subsidiaryType={currentSubsidiary.subsidiaryType}
+              workers={currentSubsidiary.technicians}
+              clients={currentSubsidiary.clients}
             />
-          ))}
+          
         </>
       )}
     </div>

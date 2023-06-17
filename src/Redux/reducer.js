@@ -8,7 +8,7 @@ const initialState = {
         role:'',
         isAdmin:''
     },
-    currentSubsidiary:[],
+    currentSubsidiary:{},
     infoSubsidiaries:[],
     workersBySubsidiary:[],        
 }
