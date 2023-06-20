@@ -14,6 +14,13 @@ export default function TechnicianDetails  () {
     const [editedTechnician, setEditedTechnician] = useState({});
     const [editMode, setEditMode] = useState(false);
 
+    const keyMappings = {
+      clientName: 'Nombre del cliente',
+      issueDate: 'Fecha de emisión',
+      workType: 'Tipo de trabajo',
+      orderNumber: 'Número de orden',
+    };
+
     useEffect(() => {
         setTimeout(() => {
             dispatch(technicianDetails(id))
@@ -82,12 +89,15 @@ export default function TechnicianDetails  () {
                       <ul>
                         {detailedTechnician.jobsAssigned.map((jobString, index) => {
                           const jobObject = JSON.parse(jobString);
-                          return Object.entries(jobObject).map(([key, value]) => (
-                            <li key={index + key} className='text-muted'>
-                              <strong>{key}: </strong>
-                              {value}
-                            </li>
-                          ));
+                          return Object.entries(jobObject).map(([key, value]) => {
+                            const mappedKey = keyMappings[key] || key;
+                            return (
+                              <li key={index + key} className='text-black'>
+                                <strong className='text-muted'>{mappedKey}: </strong>
+                                {value}
+                              </li>
+                            );
+                          });
                         })}
                       </ul>
                     )}
@@ -125,7 +135,7 @@ export default function TechnicianDetails  () {
               <div className="modal-footer d-flex justify-content-center">
                 <div className='d-flex flex-column'>
                   <h3>Editar técnico</h3>
-                  <button className="btn btn-secondary" onClick={() => setEditMode(!editMode)}>
+                  <button className="btn btn-sm border border-2 border-primary" onClick={() => setEditMode(!editMode)}>
                     {editMode ? 'Cancelar edición' : 'Editar'}
                   </button>
                 </div>
