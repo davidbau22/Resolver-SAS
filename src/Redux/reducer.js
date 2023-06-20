@@ -1,4 +1,4 @@
-import { GET_TECHNICIAN, GET_CLIENTS, GET_SUBSIDIARY, SUBSIDIARY_DETAILS, ACTION_LOGIN_SUCCESS, FILTER_BY_SUBSIDIARY, ORDER_BY_NAME, TECHNICIAN_DETAILS, UPDATE_TECHNICIAN_SUCCESS} from "./actions";
+import { GET_TECHNICIAN, GET_CLIENTS, GET_SUBSIDIARY, SUBSIDIARY_DETAILS, ACTION_LOGIN_SUCCESS, TECHNICIAN_DETAILS, UPDATE_TECHNICIAN_SUCCESS} from "./actions";
 
 const initialState = {
     loginState: {
@@ -9,8 +9,10 @@ const initialState = {
         isAdmin:''
     },
     currentSubsidiary:{},
+    currentTechnician:{},
     infoSubsidiaries:[],
-    technicianDetailsBySubsidiary:[],        
+    technicianDetailsBySubsidiary:[],   
+    techniciansInfo:[],     
 }
 
 function rootReducer (state = initialState, action) {
@@ -32,6 +34,12 @@ function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 infoSubsidiaries: action.payload
+            }
+
+        case GET_TECHNICIAN: 
+            return {
+                ...state,
+                techniciansInfo: action.payload
             }   
 
         case SUBSIDIARY_DETAILS:
@@ -44,6 +52,7 @@ function rootReducer (state = initialState, action) {
             return {
                 ...state,
                 technicianDetailsBySubsidiary: action.payload,
+                currentTechnician: action.payload
             };
 
         case UPDATE_TECHNICIAN_SUCCESS:
