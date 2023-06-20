@@ -23,38 +23,57 @@ export default function AdminHome() {
       console.log(subTypeId,'soy subTypeId----------');   
       setSelectedSubsidiary(subTypeId);
       dispatch(getSubsidiaryById(subTypeId)); 
-      /* const workers = currentSubsidiary[0]?.workers || [];
-      dispatch(setCurrentWorkers(workers)); */
 
     }
 
     return (
-    <div>
-        <header>{admin.role}</header>
-        <h1>{`Bienvenido de nuevo,${admin.name} `}</h1>
-        <div>
-            {
-                allSubsidiaries && allSubsidiaries.map((s) =>{
-                    return (
-                        <button key={s.id} onClick={() => handleSubsidiarySelection(s.subsidiaryType)}>
-                            { `Sucursal ${s.subsidiaryType}`}
-                        </button>
-                    )
-                })
-            }
+      <div>
+        <style>
+          {`
+          .navbar {
+            border-radius: 10px;
+            /* Aquí puedes agregar más estilos si lo deseas */
+          }
+  
+          .hover-grow:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          }
+          `}
+        </style>
+        <nav className="navbar navbar-dark bg-primary justify-content-end">
+          <span className="navbar-brand">
+            {admin.role}, David
+          </span>
+        </nav>
+        <div className="container text-center mt-5">
+          <h1 className="text-primary" style={{ fontFamily: 'Arial', fontSize: '2.5rem' }}>
+            Bienvenido de nuevo, David
+          </h1>
+          <div className="d-flex justify-content-center mt-5">
+            {allSubsidiaries &&
+              allSubsidiaries.map((s) => (
+                <button
+                  key={s.id}
+                  className="btn btn-primary btn-lg mx-2 hover-grow"
+                  onClick={() => handleSubsidiarySelection(s.subsidiaryType)}
+                  style={{ fontFamily: 'Arial', fontSize: '1.5rem' }}
+                >
+                  Sucursal {s.subsidiaryType}
+                </button>
+              ))}
+          </div>
         </div>
         {selectedSubsidiary && (
-        <>
-
+          <div className="container mt-5">
             <Subsidiary
               key={currentSubsidiary.subsidiaryType}
               subsidiaryType={currentSubsidiary.subsidiaryType}
               workers={currentSubsidiary.technicians}
               clients={currentSubsidiary.clients}
             />
-          
-        </>
-      )}
-    </div>
-  );
+          </div>
+        )}
+      </div>
+    );
 }

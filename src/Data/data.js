@@ -4,7 +4,7 @@ export const userAdmin =
         name:'admin',
         email:'admin@example.com',
         password:'12345',
-        role:'administrador',
+        role:'Administrador',
         isAdmin:'true'
 
     };

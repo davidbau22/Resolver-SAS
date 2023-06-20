@@ -6,7 +6,10 @@ import Login from './Components/Login';
 import AdminHome from './Components//AdminHome';
 import TechnicianHome from './Components/TechnicianHome';
 import Subsidiary from './Components/Subsidiary';
-import {ProtectedRoute} from './Components/ProtectedRoute';
+import CreateTechnician from './Components/CreateTechniciann';
+import TechnicianDetails from './Components/TechnicianDetails';
+import CreateWork from './Components/CreateWork';
+import { ProtectedRoute } from './Components/ProtectedRoute';
 
 function App() {
   
@@ -19,8 +22,9 @@ function App() {
             <Route index path='/login' element={<Login />} />
             <Route element={<ProtectedRoute user={loginAdmin} />}>
               <Route path="/adminhome" element={<AdminHome/>}/>
-              <Route path="/subsidiary/:id" element={<Subsidiary/>}/>
-              {/* <Route path="/technician_details/" element={<Subsidiary/>}/> */}
+              <Route path="/subsidiary/creatework/:id" element={<CreateWork/>}/>
+              <Route path="/createtechnician" element={<CreateTechnician/>}/>
+              <Route path="/technician_details/:id" element={<TechnicianDetails/>}/>
             </Route>
             <Route path="/technicianhome" element={<TechnicianHome/>}/>
         </Routes>
