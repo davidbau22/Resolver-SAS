@@ -72,12 +72,15 @@ export function getSubsidiaryById(id){
 
 ////////--Technicians START--//////////////
 
-export function setCurrentWorkers(workers) {
-    return {
-      type: 'GET_TECHNICIAN',
-      payload: workers,
-    };
-  };
+export function setCurrentWorkers() {
+    return async function (dispatch) {
+         let urlJson = await axios.get(`http://localhost:3001/technician`);
+         return dispatch({
+             type:'GET_TECHNICIAN',
+             payload: urlJson.data
+         })
+    }
+};
 
 export function postTechnician(payload){
     return async function(){

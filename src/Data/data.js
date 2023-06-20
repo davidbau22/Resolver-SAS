@@ -15,7 +15,7 @@ export const userTechnician =
         name:'technician',
         email:'technician@example.com',
         password:'12345',
-        role:'technician',
+        role:'Técnico',
         isAdmin:'false'
     };
 

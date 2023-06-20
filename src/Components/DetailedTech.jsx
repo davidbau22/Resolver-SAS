@@ -4,15 +4,15 @@ import {useParams} from 'react-router';
 import {Link, useNavigate as navigate} from 'react-router-dom';
 import { technicianDetails, updateTechnician } from '../Redux/actions';
 
-export default function TechnicianDetails  () {
+export default function DetailedTech  () {
     const dispatch = useDispatch();
     const {id} = useParams();
     const [loading, setLoading] = useState(true);
     const detailedTechnician = useSelector((state)=> state.technicianDetailsBySubsidiary);
-    console.log(detailedTechnician.jobsAssigned[0],'-+-+-++-+-+-+-+-+');
-    console.log(detailedTechnician,'+++++++++');
+    const currentTech = useSelector((state)=> state.currentTechnician);
     const [editedTechnician, setEditedTechnician] = useState({});
     const [editMode, setEditMode] = useState(false);
+    const jobAssigned = currentTech.jobsAssigned?.length >0? true: false;
 
     const keyMappings = {
       clientName: 'Nombre del cliente',
@@ -87,7 +87,7 @@ export default function TechnicianDetails  () {
                       <p>Sin trabajos asignados</p>
                     ) : (
                       <ul>
-                        {detailedTechnician.jobsAssigned.map((jobString, index) => {
+                        {detailedTechnician.jobsAssigned?.map((jobString, index) => {
                           const jobObject = JSON.parse(jobString);
                           return Object.entries(jobObject).map(([key, value]) => {
                             const mappedKey = keyMappings[key] || key;
@@ -127,14 +127,15 @@ export default function TechnicianDetails  () {
                   </ul>
                 </div>
                 <div className='d-flex justify-content-center mt-2'>
-                  <Link to="/adminhome">
+                  <Link to="/technicianhome">
                     <button className="btn btn-primary">Volver</button>
                   </Link>
                 </div>
               </div>
+              {jobAssigned ?
               <div className="modal-footer d-flex justify-content-center">
                 <div className='d-flex flex-column'>
-                  <h3>Editar técnico</h3>
+                  <h3>Completar asignación</h3>
                   <button className="btn btn-sm border border-2 border-primary" onClick={() => setEditMode(!editMode)}>
                     {editMode ? 'Cancelar edición' : 'Editar'}
                   </button>
@@ -157,12 +158,12 @@ export default function TechnicianDetails  () {
                         </datalist>
                       </div>
                       <div className="mb-3">
-                        <label>Email</label>
+                        <label>Visited Client</label>
                         <input
                           type="email"
                           name="email"
                           className="form-control"
-                          value={editedTechnician.email || detailedTechnician.email}
+                          value={editedTechnician.visitedClients || detailedTechnician.visitedClients}
                           onChange={handleInputChange}
                         />
                       </div>
@@ -173,6 +174,9 @@ export default function TechnicianDetails  () {
                   </div>
                 )}
               </div>
+                :
+                <h3 className="class">Aun sin trabajos asignados</h3>
+            }
             </div>
           </div>
         </div>

@@ -9,7 +9,8 @@ import Subsidiary from './Components/Subsidiary';
 import CreateTechnician from './Components/CreateTechniciann';
 import TechnicianDetails from './Components/TechnicianDetails';
 import CreateWork from './Components/CreateWork';
-import { ProtectedRoute } from './Components/ProtectedRoute';
+import DetailedTech from './Components/DetailedTech';
+import { ProtectedRoute, ProtectedRouteTech } from './Components/ProtectedRoute';
 
 function App() {
   
@@ -26,7 +27,8 @@ function App() {
               <Route path="/createtechnician" element={<CreateTechnician/>}/>
               <Route path="/technician_details/:id" element={<TechnicianDetails/>}/>
             </Route>
-            <Route path="/technicianhome" element={<TechnicianHome/>}/>
+              <Route path="/detailedtech/:id" element={<DetailedTech/>}/>
+              <Route path="/technicianhome" element={<TechnicianHome/>}/>
         </Routes>
     </BrowserRouter>
   );
